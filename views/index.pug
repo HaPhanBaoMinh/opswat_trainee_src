@@ -1,0 +1,22 @@
+extends layout.pug
+
+block content
+  .bg-white.border-2.border-black.shadow-md.p-6
+    h1.text-2xl.font-bold.mb-6.text-gray-800 Todo List
+
+    form(method="POST", action="/todos").mb-6
+      .flex
+        input(type="text", name="task", placeholder="New task...", required).flex-1.p-2.border-2.border-black
+        button(type="submit").bg-blue-500.text-white.px-4.py-2.border-2.border-black.hover-bg-blue-600 Add Task
+
+    .space-y-2
+      each todo in todos
+        .flex.items-center.p-3.border-2.border-black.hover-bg-gray-50
+          .flex-1
+            input(type="checkbox", name="status", checked=todo.status, disabled).mr-3
+            span(class=todo.status ? 'line-through text-gray-400' : 'text-gray-700')= todo.task
+          .flex.items-center.space-x-2
+            a(href=`/todos/${todo.id}/edit`).text-blue-500.hover-text-blue-700 Edit
+            form(method="POST", action=`/todos/${todo.id}?_method=DELETE`)
+              button(type="submit").text-red-500.hover-text-red-700 Delete
+

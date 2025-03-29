@@ -1,0 +1,18 @@
+extends layout.pug
+
+block content
+  .bg-white.border-2.border-black.shadow-md.p-6
+    h1.text-2xl.font-bold.mb-6.text-gray-800 Edit Task
+    
+    form(method="POST", action=`/todos/${todo.id}?_method=PUT`)
+      .mb-4
+        label.block.text-gray-700.mb-2 Task
+        input(type="text", name="task", value=todo.task, required).w-full.p-2.border-2.border-black
+      .mb-4
+        label.flex.items-center
+          input(type="checkbox", name="status", checked=todo.status).mr-2
+          span.text-gray-700 Completed
+      .flex.justify-end.space-x-3
+        a(href="/").px-4.py-2.border-2.border-black.text-gray-700 Cancel
+        button(type="submit").bg-blue-500.text-white.px-4 OK
+
